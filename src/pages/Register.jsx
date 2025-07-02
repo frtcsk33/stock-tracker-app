@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import { Link } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 function Register(){
 
@@ -20,13 +20,13 @@ function Register(){
 
         try {
             const res  = await axios.post('http://localhost:4000/api/auth/register',form);
-            alert('Tebrikler! başarıyla kaydoldunuz.');
+            toast.success('Tebrikler! başarıyla kaydoldunuz.');
             navigate('/login');
         } catch (err) {
             if(err.response?.data?.error){
-                alert(err.response.data.error);
+                toast.error(err.response.data.error);
             }else{
-                alert('bir hata oluştu!', err);
+                toast.error(err.response?.data?.error || 'Bir hata oluştu!');
             }
         }
 

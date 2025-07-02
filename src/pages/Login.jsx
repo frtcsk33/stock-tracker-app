@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 
 
 function Login() {
@@ -21,11 +21,11 @@ function Login() {
       const res = await axios.post('http://localhost:4000/api/auth/login', form);
       // console.log('Login response:', res.data);
       localStorage.setItem('token', res.data.token);
-      alert('Başarıyla giriş yaptınız.');
+      toast.success('Başarıyla giriş yaptınız.');
       
       navigate('/stocks'); 
     } catch (err) {
-      alert(err.response?.data?.error || 'Giriş başarısız.');
+      toast.error(err.response?.data?.error || 'Giriş başarısız.');
     }
   };
 
@@ -70,9 +70,9 @@ const handleLogin = async () => {
     const token = res.data.token;
     console.log(token);
     localStorage.setItem('token', token);
-    navigate('/stocks'); // veya dashboard
+    navigate('/stocks'); 
   } catch (err) {
-    alert('Giriş başarısız');
+    toast.error('Giriş başarısız');
   }
 };
 export default Login;

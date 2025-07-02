@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { toast } from 'react-toastify';
 function Stocks() {
   const [stocks, setStocks] = useState([]);
   const [selected, setSelected] = useState([]);
@@ -17,7 +17,7 @@ function Stocks() {
       });
         setStocks(res.data);
       } catch (err) {
-        alert('Hisse listesi yüklenemedi');
+        toast.error('Hisse listesi yüklenemedi');
       }
     };
 
@@ -39,10 +39,10 @@ function Stocks() {
       { stockIds: selected },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    alert('Takip listesi güncellendi!');
+    toast.success('Takip listesi güncellendi!');
     navigate('/dashboard'); 
   } catch (err) {
-    alert('Kayıt başarısız!');
+    toast.error('Kayıt başarısız!');
   }
 };
 

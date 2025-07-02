@@ -1,19 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import * as jwt_decode from 'jwt-decode';
+import { toast } from 'react-toastify';
 
 function Tracking() {
   const [stocks, setStocks] = useState([]);
-  
-  // Test için userId sabit, sen token veya context ile alabilirsin
-  const userId = 1;
 
   useEffect(() => {
     const fetchTrackingStocks = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/user-stocks/${userId}`);
+        const token = localStorage.getItem('token');
+        if (!token) {
+          toast.error('Lütfen giriş yapın!');
+          return;
+        }
+
+        const decoded = jwt_decode(token);
+        const userId = decoded.id;  
+
+        const res = await axios.get(`http://localhost:4000/api/user-stocks/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
         setStocks(res.data);
       } catch (err) {
-        alert('Takip edilen hisseler yüklenemedi');
+        toast.error('Takip edilen hisseler yüklenemedi');
       }
     };
 

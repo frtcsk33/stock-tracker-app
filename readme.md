@@ -1,68 +1,91 @@
-# Hisse Takip Uygulaması
+# 📊 Hisse Takip Uygulaması
 
-Bu proje, kullanıcıların hisse senetlerini takip etmelerini sağlayan masaüstü ve web tabanlı bir uygulamadır. Kullanıcılar kayıt olabilir, giriş yapabilir, harici API'den çekilen hisse senedi listesinden seçim yaparak takip ettiklerini kaydedebilir ve takip ettikleri hisseleri görüntüleyebilirler.
-
----
-
-## Temel Özellikler
-
-- Kullanıcı kayıt ve giriş sistemi (JWT ile oturum yönetimi)
-- BigPara Hürriyet API'den hisse senedi verilerinin çekilip SQLite veritabanına kaydedilmesi
-- Kullanıcı bazlı hisse takip listesi oluşturma ve görüntüleme
-- React tabanlı kullanıcı arayüzü
-- Node.js ve Express tabanlı backend
-- Responsive tasarım için Bootstrap kullanımı
+Bu proje, kullanıcıların kayıt olup giriş yaparak ilgilendikleri hisseleri seçip takip edebilecekleri bir masaüstü hisse senedi takip uygulamasıdır.\
+**React + Node.js + SQLite** teknolojileriyle geliştirilmiştir.
 
 ---
 
-## Kullanılan Teknolojiler ve Kütüphaneler
+## 🚀 Kurulum ve Çalıştırma Talimatları
 
-### Backend
+### 1. Repozitoriyi klonla:
 
-- Node.js
-- Express
-- Sequelize (ORM)
-- SQLite (veritabanı)
-- bcrypt (şifreleme için)
-- jsonwebtoken (JWT ile oturum yönetimi)
-- axios (HTTP istekleri)
-- dotenv (çevresel değişken yönetimi)
-- iconv-lite (API’den gelen verilerin kodlamasını dönüştürmek için)
-
-### Frontend
-
-- React
-- React Router DOM (sayfa yönlendirme)
-- Axios (API çağrıları)
-- Bootstrap (stil ve responsive tasarım)
-
----
-
-## Kurulum ve Çalıştırma
-
-### Backend
-
-1. Proje kök dizininde terminal açın.
-2. Gerekli paketleri yükleyin:
-   ```bash
-   npm install
-**3**.Proje kökünde .env dosyası oluşturun ve aşağıdaki değişkenleri ekleyin:
-
-JWT_SECRET=buraya_gizli_anahtarınızı_yazın
-
-PORT=4000
-
-4. Backend sunucusunu başlatın:
 ```bash
-node server.js
-npx nodemon server.js
+git clone <repo-link>
+cd proje-klasoru
+```
 
+### 2. Backend'i başlat:
 
-### Frontend
-1.Frontend klasörüne geçiş yapın:
-cd frontend
-2.Gerekli paketleri yükleyin:
+```bash
+cd backend
 npm install
-3.React uygulamasını başlatın:
-npm start
-4.Tarayıcınızda http://localhost:5173 (veya terminalde belirtilen port) adresini açın.
+node server.js
+```
+
+> Backend sunucusu varsayılan olarak `http://localhost:4000` portunda çalışır.
+
+### 3. Frontend'i başlat:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+> Frontend sunucusu `http://localhost:5173` üzerinden erişilebilir.
+
+### 4. Ortam Değişkenlerini Ayarla (`.env`):
+
+Proje kök dizininde `.env` dosyası oluşturun ve aşağıdaki gibi yapılandırın:
+
+```
+JWT_SECRET=çok_gizli_bir_anahtar_yazın
+PORT=4000
+```
+
+> `JWT_SECRET`: Bu değeri rastgele ve tahmin edilmesi zor bir metin olarak belirleyin. Örneğin:
+>
+> ```bash
+> JWT_SECRET=SDFkj234LKjsdf9832JKLsdflkj923
+> ```
+>
+> Bu anahtar, kullanıcıların oturumlarını güvenli şekilde yönetmek için kullanılır.
+
+---
+
+## 🧹 Projenin Temel Özellikleri
+
+- 👤 **Kayıt Ol / Giriş Yap**: Kullanıcılar kayıt olabilir ve JWT ile güvenli giriş yapabilir.
+- 📈 **Hisse Listesi Gösterimi**: Harici API'den alınan hisse senetleri listelenir.
+- ✅ **Seçili Hisseleri Takip Et**: Kullanıcılar ilgilendikleri hisseleri seçip kendi listelerine kaydedebilir.
+- 📋 **Takip Listesi Görüntüleme**: Giriş yapan kullanıcı, daha önce seçtiği hisseleri görebilir.
+- 💾 **Veritabanı**: SQLite kullanılarak kullanıcı ve hisse verileri saklanır.
+
+---
+
+## 💠 Kullanılan Teknolojiler ve Kütüphaneler
+
+### Backend (Node.js + Express):
+
+- `express` – HTTP sunucusu oluşturmak için
+- `sequelize` – ORM (Object-Relational Mapping)
+- `sqlite3` – Hafif veritabanı çözümü
+- `jsonwebtoken` – JWT token üretimi ve kontrolü
+- `bcrypt` – Şifrelerin güvenli bir şekilde hashlenmesi
+- `dotenv` – Ortam değişkenlerini yönetmek için
+- `axios` – API'den veri çekmek için
+- `cors` – Cross-Origin istekleri için
+- `iconv-lite` – Türkçe karakter sorununu çözmek için (API decoding)
+
+### Frontend (React + Vite):
+
+- `react-router-dom` – Sayfa yönlendirmeleri için
+- `axios` – Backend ile HTTP iletişimi için
+- `bootstrap` – UI stil ve bileşenleri
+- `react-toastify` – Bildirim göstermek için (toast mesajları)
+
+
+## 📬 Geri Bildirim
+
+Her türlü geri bildirim ve katkı için PR gönderebilir ya da benimle iletişime geçebilirsiniz.
+
