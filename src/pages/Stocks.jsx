@@ -7,13 +7,14 @@ function Stocks() {
   const [selected, setSelected] = useState([]);
   const navigate = useNavigate();
 
-  // Burada userId'yi test için sabit veriyoruz; sonra JWT'den alacağız
-  const userId = 1;
 
   useEffect(() => {
     const fetchStocks = async () => {
+      const token = localStorage.getItem('token');
       try {
-        const res = await axios.get('http://localhost:4000/api/stocks');
+      const res = await axios.get('http://localhost:4000/api/stocks', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
         setStocks(res.data);
       } catch (err) {
         alert('Hisse listesi yüklenemedi');
@@ -32,17 +33,19 @@ function Stocks() {
   };
 
   const handleSubmit = async () => {
-    try {
-      await axios.post('http://localhost:4000/api/user-stocks', {
-        userId,
-        stockIds: selected
-      });
-      alert('Takip listesi güncellendi!');
-      navigate('/dashboard'); // sonraki ekran
-    } catch (err) {
-      alert('Kayıt başarısız!');
-    }
-  };
+  const token = localStorage.getItem('token');
+  try {
+    await axios.post('http://localhost:4000/api/user-stocks', 
+      { stockIds: selected },
+      { headers: { Authorization: `Bearer ${token}` } }
+    );
+    alert('Takip listesi güncellendi!');
+    navigate('/dashboard'); 
+  } catch (err) {
+    alert('Kayıt başarısız!');
+  }
+};
+
 
   return (
     <div className="container mt-5">

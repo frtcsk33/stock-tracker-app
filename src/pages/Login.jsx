@@ -1,24 +1,8 @@
-// import React from "react";
-
-// function Login(){
-
-//     return(
-
-//         <div>
-//             <h2>Giriş sayfası</h2>
-//         </div>
-
-
-//     );
-
-// }
-
-// export default Login;
-
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+
+
 
 function Login() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -35,7 +19,10 @@ function Login() {
 
     try {
       const res = await axios.post('http://localhost:4000/api/auth/login', form);
+      // console.log('Login response:', res.data);
+      localStorage.setItem('token', res.data.token);
       alert('Başarıyla giriş yaptınız.');
+      
       navigate('/stocks'); 
     } catch (err) {
       alert(err.response?.data?.error || 'Giriş başarısız.');
@@ -77,4 +64,15 @@ function Login() {
   );
 }
 
+const handleLogin = async () => {
+  try {
+    const res = await axios.post('http://localhost:4000/api/auth/login', { email, password });
+    const token = res.data.token;
+    console.log(token);
+    localStorage.setItem('token', token);
+    navigate('/stocks'); // veya dashboard
+  } catch (err) {
+    alert('Giriş başarısız');
+  }
+};
 export default Login;
