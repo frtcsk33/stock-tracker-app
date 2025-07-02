@@ -47,8 +47,11 @@ Bu proje, kullanıcıların hisse senetlerini takip etmelerini sağlayan masaüs
    ```bash
    npm install
 **3**.Proje kökünde .env dosyası oluşturun ve aşağıdaki değişkenleri ekleyin:
+
 JWT_SECRET=buraya_gizli_anahtarınızı_yazın
+
 PORT=4000
+
 4. Backend sunucusunu başlatın:
 ```bash
 node server.js
